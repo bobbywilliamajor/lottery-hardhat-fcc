@@ -99,6 +99,7 @@ contract Raffle is VRFConsumerBaseV2, AutomationCompatibleInterface {
         bool hasBalance = address(this).balance > 0;
         upkeepNeeded = (isOpen && timePassed && hasPlayers && hasBalance);
         // (block.timestamp - lastTimestamp) > interval
+        return (upkeepNeeded, "0x0");
     }
 
     function performUpkeep(bytes calldata /*perfomData*/) external override {
@@ -126,8 +127,8 @@ contract Raffle is VRFConsumerBaseV2, AutomationCompatibleInterface {
         uint256[] memory roundWords
     ) internal override {
         uint256 indexOfWinner = roundWords[0] % s_players.length;
-        s_recentWinner = s_players[indexOfWinner];
         address payable recenttWinner = s_players[indexOfWinner];
+        s_recentWinner = recenttWinner;
         s_raffleState = RaffleState.OPEN;
         s_players = new address payable[](0);
         s_lastTimestamp = block.timestamp;

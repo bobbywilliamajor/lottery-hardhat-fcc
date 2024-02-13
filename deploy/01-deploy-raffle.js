@@ -22,7 +22,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
         subscriptionId = transactionReceipt.logs[0].args.subId
         await vrfCoordinatorV2Mock.fundSubscription(subscriptionId, VRF_SUB_FUND_AMOUNT)
     } else {
-        vrfCoordinatorV2Address = networkConfig[chainId]["vrfCoordinatorV2Mock"]
+        vrfCoordinatorV2Address = networkConfig[chainId]["vrfCoordinatorV2"]
         subscriptionId = networkConfig[chainId]["subscriptionId"]
     }
 
